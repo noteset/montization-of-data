@@ -7,7 +7,16 @@ interface Props {
   data: DataSummary;
 }
 
-export function DataSummary({ data }: Props) {
+const stableData = {
+  mobilePercentage: 45,
+  wifiPercentage: 55,
+  topApp: 'ExampleApp',
+  otherUsagePercentage: 20,
+  totalUsage: 12345,
+  monthlyChange: 5
+};
+
+export function DataSummary({ data = stableData }: Props) {
   const totalUsageGB = (data.totalUsage / 1000).toFixed(2);
 
   return (
