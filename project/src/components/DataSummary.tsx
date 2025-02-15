@@ -1,3 +1,4 @@
+```tsx
 import React from 'react';
 import { TrendingUp, TrendingDown, Smartphone, Wifi, Award } from 'lucide-react';
 import type { DataSummary } from '../types';
@@ -7,9 +8,11 @@ interface Props {
 }
 
 export function DataSummary({ data }: Props) {
+  const totalUsageGB = (data.totalUsage / 1000).toFixed(2);
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
           <div className="bg-blue-100 p-3 rounded-full">
             <Smartphone className="text-blue-600" size={24} />
@@ -39,13 +42,23 @@ export function DataSummary({ data }: Props) {
             <p className="text-xl font-bold">{data.topApp}</p>
           </div>
         </div>
+        
+        <div className="flex items-center space-x-4 p-4 bg-yellow-50 rounded-lg">
+          <div className="bg-yellow-100 p-3 rounded-full">
+            <Wifi className="text-yellow-600" size={24} />
+          </div>
+          <div>
+            <p className="text-sm text-gray-600">Other Usage</p>
+            <p className="text-xl font-bold">{data.otherUsagePercentage}%</p>
+          </div>
+        </div>
       </div>
 
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-gray-600">Total Usage</p>
-            <p className="text-2xl font-bold">{(data.totalUsage / 1000).toFixed(2)} GB</p>
+            <p className="text-2xl font-bold">{totalUsageGB} GB</p>
           </div>
           <div className="flex items-center space-x-2">
             {data.monthlyChange >= 0 ? (
@@ -66,3 +79,4 @@ export function DataSummary({ data }: Props) {
     </div>
   );
 }
+```
